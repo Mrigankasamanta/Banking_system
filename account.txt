@@ -1,0 +1,64 @@
+[1. Your Account Balance is : 928
+2. Name : Mriganka Samanta
+3. Date Of Birth : 12-07-2004
+4. Phone number : +91 8509771420
+5. Account Number : 1007966297
+6. Account Type : Saving Account
+7. Gmail : Not available
+8. pin : 125678]
+[1. Your Account Balance is : 2000
+2. Name : Rimi Das
+3. Date Of Birth : 10-12-2004
+4. Phone number : +91 9749792623
+5. Account Number : 8499238353
+6. Account Type : Saving Account
+7. Gmail : Not available
+8. pin : 234589]
+[1. Your Account Balance is : 0
+2. Name : Pritam Mondal
+3. Date Of Birth : 12-2-2004
+4. Phone number : +91 4562359845
+5. Account Number : 2917483234
+6. Account Type : Current Account
+7. Gmail : Not available
+8. pin : 124589]
+[1. Your Account Balance is : 2
+2. Name : Suku Nayek
+3. Date Of Birth : 01-1-2006
+4. Phone number : +91 2456395442
+5. Account Number : 7980101431
+6. Account Type : Salary Account
+7. Gmail : Not available
+8. pin : 458963]
+[1. Your Account Balance is : 25
+2. Name : Rakesh Rang
+3. Date Of Birth : 18-2-2004
+4. Phone number : +91 1236547895
+5. Account Number : 7842809581
+6. Account Type : Salary Account
+7. Gmail : Not available
+8. pin : 458695]
+[1. Your Account Balance is : 80
+2. Name : Rahul Samanta
+3. Date Of Birth : 4-9-2004
+4. Phone number : +91 4589632145
+5. Account Number : 4137583104
+6. Account Type : Saving Account
+7. Gmail : Not available
+8. pin : 458963]
+[1. Your Account Balance is : 2500
+2. Name : Mitali Samanta
+3. Date Of Birth : 19-3-1984
+4. Phone number : +91 9732514955
+5. Account Number : 1546536158
+6. Account Type : Saving Account
+7. Gmail : Not available
+8. pin : 789456]
+[1. Your Account Balance is : 4000
+2. Name : Mintulal Samanta
+3. Date Of Birth : 12-7-1980
+4. Phone number : +91 9732514955
+5. Account Number : 6606633120
+6. Account Type : Salary Account
+7. Gmail : Not available
+8. pin : 123456]
