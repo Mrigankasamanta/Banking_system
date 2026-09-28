@@ -7,9 +7,18 @@
     color: #072de9;
 }
 
+.heading{
+    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: #830000;
+}
+
 .mood{
-    display: flex;
-    justify-content: end;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }
 
 .dark{
