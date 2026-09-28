@@ -1,24 +1,34 @@
 .msg{
-    height: 90vh;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: large;
+    font-size: clamp(0.8rem, 2vw, 1rem);
     color: #072de9;
 }
 
 .heading{
+    min-height: 20vh;
     position: relative;
     display:flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
     color: #830000;
+}
+
+.heading h1 {
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    font-size: clamp(1.4rem, 5vw, 2.5rem);
 }
 
 .mood{
     position: absolute;
-    top: 1rem;
     right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .dark{
@@ -52,4 +62,33 @@
 
 .hide{
     display: none;
+}
+
+@media (max-width: 800px) {
+
+    .heading {
+        min-height: 20vh;
+        padding: 0.5rem 1rem;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .heading h1 {
+        font-size: clamp(0.8rem, 4vw, 2.5rem);
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .mood {
+        position: absolute;
+        top: 3.5rem;
+        right: 1rem;
+    }
+
+    .dark,
+    .light {
+        padding: clamp(0.6rem, 2vw, 1rem);
+        font-size: clamp(0.7rem, 2.5vw, 1rem);
+        border-radius: 1.5rem;
+    }
 }
