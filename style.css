@@ -1,0 +1,46 @@
+.msg{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    color: #072de9;
+}
+
+.mood{
+    display: flex;
+    justify-content: end;
+}
+
+.dark{
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 1.5rem;
+    background-color: #010736;
+    color: #ffffff;
+    border-color: aqua;
+}
+
+
+.light{
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 1.5rem;
+    background-color: #ffffff;
+    color: #010736;
+    border-color: aqua;
+}
+
+.night{
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.day {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.hide{
+    display: none;
+}

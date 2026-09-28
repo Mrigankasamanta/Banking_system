@@ -1,6 +1,7 @@
 from random import randint
 from datetime import datetime
 
+
 class account:
     def __init__(self, name, dob, phone, pin, account_type, account_no,gmail, balance = 0):
         self.name = name
@@ -18,14 +19,14 @@ class account:
     # for debit 
     def debit(self, ammount):
         self.balance -= ammount
-        print(f"{ammount} is debited from your accont {self.account_no}")
-        print(f"Now your account total balance is {self.get_balance()}")
+        print(f"\n{ammount} is debited from your accont {self.account_no}")
+        print(f"Now your account total balance is {self.get_balance()}\n")
 
     # for credit 
     def credit(self, ammount):
         self.balance += ammount
-        print(f"{ammount} is credited from your accont {self.account_no}")
-        print(f"Now your account total balance is {self.get_balance()}")
+        print(f"\n{ammount} is credited from your accont {self.account_no}")
+        print(f"Now your account total balance is {self.get_balance()}\n")
 
     def get_balance(self):
         return self.balance
@@ -47,8 +48,11 @@ def credit(account_no):
             pin = acc.split("pin :")[1].strip()
 
             coustomer = account(name, dob, phone, pin, account_type, account_no, gmail, balance)
-            ammount = int(input("Enter how many money you want to add your account : "))
-            coustomer.credit(ammount)
+            amount = int(input("\nEnter how many money you want to add your account : "))
+            coustomer.credit(amount)
+            with open("transaction.txt", "a") as f:
+                history = f"[Account no = {account_no}\nDate & Time = {datetime.now()}\nTransaction type = Credit\nAmount = {amount}]\n"
+                f.write(history)
 
             new_balance = coustomer.get_balance()
             old_line = f"Your Account Balance is : {balance}"
@@ -74,14 +78,20 @@ def debit(account_no, pin):
             balance = int(acc.split("Your Account Balance is :")[1].split("\n")[0].strip())
             
             coustomer = account(name, dob, phone, pin, account_type, account_no, gmail, balance)
-            ammount = int(input("Enter how many money you want to add your account : "))
-            coustomer.debit(ammount)
+            amount = int(input("\nEnter how many money you want to add your account : "))
+            if(balance >= amount):
+                coustomer.debit(amount)
+                with open("transaction.txt", "a") as f:
+                    history = f"[Account no = {account_no}\nDate & Time = {datetime.now()}\nTransaction type = Debit\nAmount = {amount}]\n"
+                    f.write(history)
 
-            new_balance = coustomer.get_balance()
-            old_line = f"Your Account Balance is : {balance}"
-            new_line = f"Your Account Balance is : {new_balance}"
-            acc = acc.replace(old_line,new_line)
-            accounts[i] = acc
+                new_balance = coustomer.get_balance()
+                old_line = f"Your Account Balance is : {balance}"
+                new_line = f"Your Account Balance is : {new_balance}"
+                acc = acc.replace(old_line,new_line)
+                accounts[i] = acc
+            else:
+                print("Insaficiant balance! 🥺")
     data = "]".join(accounts)
     with open ("account.txt", "w") as f:
         f.write(data)
@@ -93,7 +103,7 @@ def show_balance(account_no):
         accounts = data.split("]")
     for acc in accounts:
         if(account_no in acc):
-            print(acc.split("1.")[1].split("\n")[0].strip())
+            print(f"\n{acc.split("1.")[1].split("\n")[0].strip()}")
 
 def show_details(account_no):
     with open("account.txt", "r") as f:
@@ -102,7 +112,57 @@ def show_details(account_no):
         accounts = data.split("]")
     for acc in accounts:
         if(account_no in acc):
-            print(acc.split("[")[1].split("8.")[0].strip())
+            print(f"\n{acc.split("[")[1].split("8.")[0].strip()}\n")
+
+def change_pin(account_no):
+    with open("account.txt", "r") as f:
+        f.seek(0)
+        data = f.read()
+        accounts = data.split("]")
+    for i, acc in enumerate(accounts):
+        if (account_no in acc):
+            while True:
+                pin = input("\nEnter your new 6 digit security pin : ")
+                if(len(pin) == 6 and pin.isdigit()):
+                    break
+                else:
+                    print("Invalid PIN! Please enter valid PIN(must be 6 digit)...")
+            old_pin = acc.split("pin :")[1].strip()
+            new_pin = old_pin.replace(old_pin,pin)
+            acc = acc.replace(old_pin, new_pin)
+            accounts[i] = acc
+    data = "]".join(accounts)
+    with open ("account.txt", "w") as f:
+        f.write(data)
+    print("Your PIN is successfully changed.🥳\n")
+
+def close_account(account_no):
+    with open("account.txt", "r") as f:
+        f.seek(0)
+        data = f.read()
+        accounts = data.split("]")
+    for i, acc in enumerate(accounts):
+        if(account_no in acc):
+            del accounts[i]
+    data = "]".join(accounts)
+    print(data)
+    with open("account.txt", "w") as f:
+        f.write(data)
+    print("Your account is successfully closed!🥺 \nThank you for using THE YOU-R M BANK 🙏")
+
+def transaction_history(account_no):
+    with open("transaction.txt", "r") as f:
+        data = f.read()
+        transactions = data.split("]")
+    found = False
+    for tra in transactions:
+        if (account_no in tra):
+            found = True
+            transaction = tra.split("[")[1].strip()
+            print(f"\n{transaction}\n")
+            
+    if found == False:
+        print("\nNo transaction is present in this account at this moment 🙏\n")
 
 # For Dasboard after login 
 
@@ -114,70 +174,128 @@ def dasboard(account_no, pin):
 
         if(user_input == 1):
             credit(account_no)
-            n = int(input("For exit enter --> 1\t\t For continue enter --> 0\nFor home menu enter --> 2 : "))
+            n = int(input("For exit enter --> 1\nFor Back to menu enter --> 2\nFor home menu enter --> 0 : "))
             if(n == 1):
-                print("Thank you!😊 for using THE YOU-R M BANK 💸 ")
-                break
-            elif(n == 2):
-                home()
+                print("\nThank you!😊 for using THE YOU-R M BANK 💸 ")
                 break
             elif(n == 0):
-                print("Choose one : ")
+                home()
+                break
+            elif(n == 2):
+                print("\nChoose one : ")
                 continue
+            else:
+                print("Invalid enter! 👾 Please enter valid number...\n")
 
         elif(user_input == 2):
             debit(account_no, pin)
-            n = int(input("For exit enter --> 1\t\t For continue enter --> 0\nFor home menu enter --> 2 : "))
+            n = int(input("For exit enter --> 1\nFor Back to menu enter --> 2\nFor home menu enter --> 0 : "))
             if(n == 1):
-                print("Thank you!😊 for using THE YOU-R M BANK 💸 ")
-                break
-            elif(n == 2):
-                home()
+                print("\nThank you!😊 for using THE YOU-R M BANK 💸 ")
                 break
             elif(n == 0):
-                print("Choose one : ")
+                home()
+                break
+            elif(n == 2):
+                print("\nChoose one : ")
                 continue
+            else:
+                print("Invalid enter! 👾 Please enter valid number...\n")
 
         elif(user_input == 3):
             show_balance(account_no)
-            n = int(input("For exit enter --> 1\t\t For continue enter --> 0\nFor home menu enter --> 2 : "))
+            n = int(input("\nFor exit enter --> 1\nFor Back to menu enter --> 2\nFor home menu enter --> 0 : "))
             if(n == 1):
-                print("Thank you!😊 for using THE YOU-R M BANK 💸 ")
-                break
-            elif(n == 2):
-                home()
+                print("\nThank you!😊 for using THE YOU-R M BANK 💸 ")
                 break
             elif(n == 0):
-                print("Choose one : ")
+                home()
+                break
+            elif(n == 2):
+                print("\nChoose one : ")
                 continue
+            else:
+                print("Invalid enter! 👾 Please enter valid number...\n")
 
         elif(user_input == 4):
-            print("Coming soon...")
-            print("Pleasse choose again :")
+            transaction_history(account_no)
+            n = int(input("For exit enter --> 1\nFor Back to menu enter --> 2\nFor home menu enter --> 0 : "))
+            if(n == 1):
+                print("\nThank you!😊 for using THE YOU-R M BANK 💸 ")
+                break
+            elif(n == 0):
+                home()
+                break
+            elif(n == 2):
+                print("\nChoose one : ")
+                continue
+            else:
+                print("Invalid enter! 👾 Please enter valid number...\n")
 
         elif(user_input == 5):
             show_details(account_no)
-            n = int(input("For exit enter --> 1\t\t For continue enter --> 0\nFor home menu enter --> 2 : "))
+            n = int(input("For exit enter --> 1\nFor Back to menu enter --> 2\nFor home menu enter --> 0 : "))
             if(n == 1):
-                print("Thank you!😊 for using THE YOU-R M BANK 💸 ")
-                break
-            elif(n == 2):
-                home()
+                print("\nThank you!😊 for using THE YOU-R M BANK 💸 ")
                 break
             elif(n == 0):
-                print("Choose one : ")
+                home()
+                break
+            elif(n == 2):
+                print("\nChoose one : ")
                 continue
+            else:
+                print("Invalid enter! 👾 Please enter valid number...\n")
 
         elif(user_input == 6):
-            print("Coming soon...")
-            print("Pleasse choose again :")
+            change_pin(account_no)
+            n = int(input("For exit enter --> 1\nFor Back to menu enter --> 2\nFor home menu enter --> 0 : "))
+            if(n == 1):
+                print("\nThank you!😊 for using THE YOU-R M BANK 💸 ")
+                break
+            elif(n == 0):
+                home()
+                break
+            elif(n == 2):
+                print("\nChoose one : ")
+                continue
+            else:
+                print("Invalid enter! 👾 Please enter valid number...\n")
+            
 
         elif(user_input == 7):
-            print("Coming soon...")
-            print("Pleasse choose again :")
+            n = int(input("\nAre you confirm? You want to delete your accoutnt.\nIf YES enter --> 1 \t\tIf NO enter --> 2 : "))
+            if(n == 1):
+                close_account(account_no)
+                n = int(input("For exit enter --> 1\nFor home menu enter --> 0 : "))
+                if(n == 1):
+                    print("\nThank you!😊 for using THE YOU-R M BANK 💸 ")
+                    break
+                elif(n == 0):
+                    home()
+                    break
+                else:
+                     print("Invalid enter! 👾 Please enter valid number...\n")
+                
+            elif(n == 2):
+                print("Ok your account is not delete 🥳\n")
+                n = int(input("For exit enter --> 1\nFor Back to menu enter --> 2\nFor home menu enter --> 0 : "))
+                if(n == 1):
+                    print("\nThank you!😊 for using THE YOU-R M BANK 💸 ")
+                    break
+                elif(n == 0):
+                    home()
+                    break
+                elif(n == 2):
+                    print("\nChoose one : ")
+                    continue
+                else:
+                    print("Invalid enter! 👾 Please enter valid number...\n")
+            else:
+                print("Enter valid number...\n")   
 
         elif(user_input == 8):
-            print("Thank you!😊 for using THE YOU-R M BANK 💸 ")
+            print("\nThank you!😊 for using THE YOU-R M BANK 💸 \n")
             break
 
         elif(user_input == 0):
@@ -185,7 +303,7 @@ def dasboard(account_no, pin):
             break
 
         else:
-            print("Invalid Entry! Please enter a valid number...")
+            print("\nInvalid Entry! Please enter a valid number...")
             print("Pleasse choose again :")
 
         
@@ -275,13 +393,18 @@ def create_account():
     coustomer = account(name, dob, phone, pin, account_type, account_no, gmail, balance)
     with open("account.txt", "a") as f:
         f.write(f"[1. Your Account Balance is : {coustomer.balance}\n2. Name : {coustomer.name}\n3. Date Of Birth : {coustomer.dob}\n4. Phone number : +91 {coustomer.phone}\n5. Account Number : {coustomer.account_no}\n6. Account Type : {coustomer.account_type}\n7. Gmail : {coustomer.gmail}\n8. pin : {coustomer.pin}]\n")
-        print("Congratulation!🥳 You successfully created your account 🤗")
+        print(f"\nCongratulation!{name}🥳 You successfully created your account 🤗\n{name}\n")
+    if balance != 0 :
+        with open("transaction.txt", "a") as f:
+            history = f"[Account no = {account_no}\nDate & Time = {datetime.now()}\nTransaction type = Credit\nAmmount = {balance}]\n"
+            f.write(history)
 
-    n = int(input("1. for login enter --> 1\n2. for Exit enter --> 0 : "))
     while True:
+        n = int(input("1. for login enter --> 1\n2. for Exit enter --> 0 : "))
         if(n == 1):
             print("Login Successful! 😊")
             dasboard(account_no, pin)
+            break
         elif(n == 0):
             print("Thank You! 😊 For creating account.🙏")
             break
@@ -289,7 +412,6 @@ def create_account():
             print("Invalid Entry! Enter valid number...")
 
         
-
 def login():
     with open("account.txt", "r") as f:
         f.seek(0)
@@ -303,7 +425,7 @@ def login():
             login_details.append((acc_no,pin))
         
     while True:
-        account_no = input("Enter your account number : ")
+        account_no = input("\nEnter your account number : ")
         if(len(account_no) == 10 and account_no.isdigit()):
             break
         else:
@@ -314,13 +436,13 @@ def login():
         if(len(pin) == 6 and pin.isdigit()):
             break
         else:
-            print("Invalid PIN! Please enter valid PIN...")
+            print("Invalid PIN! Please enter valid PIN...\n")
 
     if((account_no,pin) in login_details):
-        print("Login Successful! 😊")
+        print(f"\nLogin Successful! 😊🙏\n")
         dasboard(account_no,pin)
     else:
-        print("Sorry ligin faild!🙏 This account is not exist in this bank!😔")
+        print("\nSorry ligin faild!🙏 This account is not exist in this bank!😔\n")
         home()
 
 
@@ -340,13 +462,18 @@ def home():
                 data = f.read()
                 accounts = data.split("]")
             for i in range(1,4):
-                a = input("Enter account number : ")
+                while True:
+                    a = input("\nEnter your account number : ")
+                    if(len(a) == 10 and a.isdigit()):
+                        break
+                    else:
+                        print("Invalid entry! Account number must be 10 digit. please enter a valid account number...")
                 for acc in accounts:
                     if a in acc:
                         credit(a)
                         break
                 else:
-                    print("This account nunber is not exist in this bank. Please enter valid account number...")
+                    print("\nThis account nunber is not exist in this bank. Please enter valid account number...")
                     continue
                 break
                 
@@ -354,12 +481,14 @@ def home():
             login()
             break
         elif(choice == 4):
+            print("\nThank you!😊 for using THE YOU-R M BANK 💸 \n")
             break
         else:
-            print("Invalid entry! Try again...")
+            print("\nInvalid entry! Try again...\n")
 
-print("         🏦 💵 WELCOME TO THE YOU-R M BANK 💸 🤑 ")
+print("\t\t\t\t🏦 💵 WELCOME TO THE YOU-R M BANK 💸 🤑\t\t\t\t")
 home()
+
 
 
 

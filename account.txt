@@ -1,4 +1,4 @@
-[1. Your Account Balance is : 928
+[1. Your Account Balance is : 141370
 2. Name : Mriganka Samanta
 3. Date Of Birth : 12-07-2004
 4. Phone number : +91 8509771420
@@ -6,7 +6,7 @@
 6. Account Type : Saving Account
 7. Gmail : Not available
 8. pin : 125678]
-[1. Your Account Balance is : 2000
+[1. Your Account Balance is : 2150
 2. Name : Rimi Das
 3. Date Of Birth : 10-12-2004
 4. Phone number : +91 9749792623
@@ -30,22 +30,6 @@
 6. Account Type : Salary Account
 7. Gmail : Not available
 8. pin : 458963]
-[1. Your Account Balance is : 25
-2. Name : Rakesh Rang
-3. Date Of Birth : 18-2-2004
-4. Phone number : +91 1236547895
-5. Account Number : 7842809581
-6. Account Type : Salary Account
-7. Gmail : Not available
-8. pin : 458695]
-[1. Your Account Balance is : 80
-2. Name : Rahul Samanta
-3. Date Of Birth : 4-9-2004
-4. Phone number : +91 4589632145
-5. Account Number : 4137583104
-6. Account Type : Saving Account
-7. Gmail : Not available
-8. pin : 458963]
 [1. Your Account Balance is : 2500
 2. Name : Mitali Samanta
 3. Date Of Birth : 19-3-1984
@@ -62,3 +46,43 @@
 6. Account Type : Salary Account
 7. Gmail : Not available
 8. pin : 123456]
+[1. Your Account Balance is : 8000
+2. Name : Indrani Das
+3. Date Of Birth : 17-06-1986
+4. Phone number : +91 7895624135
+5. Account Number : 7785357861
+6. Account Type : Saving Account
+7. Gmail : Not available
+8. pin : 123654]
+[1. Your Account Balance is : 2535
+2. Name : Uday Das
+3. Date Of Birth : 12-9-1982
+4. Phone number : +91 1258364586
+5. Account Number : 9024857999
+6. Account Type : Salary Account
+7. Gmail : Not available
+8. pin : 789456]
+[1. Your Account Balance is : 80
+2. Name : Pritam Koyal
+3. Date Of Birth : 18-8-2002
+4. Phone number : +91 6296155670
+5. Account Number : 5802992737
+6. Account Type : Saving Account
+7. Gmail : Not available
+8. pin : 123789]
+[1. Your Account Balance is : 465
+2. Name : Bikas Panja
+3. Date Of Birth : 20-11-2002
+4. Phone number : +91 9756324815
+5. Account Number : 1166648364
+6. Account Type : Salary Account
+7. Gmail : Not available
+8. pin : 789654]
+[1. Your Account Balance is : 12500
+2. Name : Sumon Manna
+3. Date Of Birth : 12-10-2002
+4. Phone number : +91 9785462654
+5. Account Number : 3414792017
+6. Account Type : Saving Account
+7. Gmail : Not available
+8. pin : 456123]
